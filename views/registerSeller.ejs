@@ -1,0 +1,17 @@
+<%- include('./partials/header.ejs') %>
+
+<div class="w-full h-[88vh] flex justify-center items-center bg-gradient-to-r from-cyan-100 to-blue-100">
+  <div class="w-[30%] h-[73%] bg-white rounded-md p-4 shadow-md mt-[-40px]">
+    <h1 class="text-2xl text-teal-600 font-bold mb-4">Register as Seller</h1>
+    <form class="flex flex-col gap-3 mb-5" action="/createSeller" method="post">
+      <input class="block w-full outline-none rounded-md border-2 border-teal-200 p-[7px]" type="text" placeholder="Name" name="name" autocomplete="off" required>
+      <input class="block w-full outline-none rounded-md border-2 border-teal-200 p-[7px]" type="email" placeholder="Email" name="email" autocomplete="off" required>
+      <input class="block w-full outline-none rounded-md border-2 border-teal-200 p-[7px]" type="number" placeholder="Contact" name="contact" autocomplete="off" required>
+      <input class="block w-full outline-none rounded-md border-2 border-teal-200 p-[7px]" type="password" placeholder="Password" name="password">
+      <button class="bg-teal-600 text-white p-2 w-full rounded-md hover:bg-teal-700" type="submit">Register</button>
+    </form>
+    <a class="text-sm mt-3" href="/">Already Registered? <span class="text-teal-600 underline text-sm">Login Here..</span></a>
+  </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>

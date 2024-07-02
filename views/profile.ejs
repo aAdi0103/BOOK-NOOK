@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Nook</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <!-- Profile Dropdown -->
+    <div class="profileDrop hidden absolute top-20 right-14 w-48 bg-gray-800 text-white rounded-md shadow-lg z-50">
+        <a href="/profile/update"
+            class="block py-2 px-4 hover:bg-gray-700 transition-colors duration-300 ease-in-out"> <i
+                class="ri-profile-line"></i> Profile</a>
+        <a href="" class="block py-2 px-4 hover:bg-gray-700 transition-colors duration-300 ease-in-out"> <i
+                class="ri-bnb-fill"></i> Orders</a>
+        <a href="" class="block py-2 px-4 hover:bg-gray-700 transition-colors duration-300 ease-in-out"> <i
+                class="ri-coupon-line"></i> Coupons</a>
+        <a href="/logout" class="block py-2 px-4 hover:bg-gray-700 transition-colors duration-300 ease-in-out"> <i
+                class="ri-logout-box-r-line"></i> Logout</a>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="flex justify-between items-center bg-white py-4 px-8 shadow-lg">
+        <div class="flex items-center space-x-8">
+            <h1 id="btn" class="text-3xl font-bold cursor-pointer text-black">BOOK NOOK</h1>
+            <input type="text" placeholder="Search for books"
+                class="w-96 p-2 border-none border-gray-300 rounded-md bg-gray-200 focus:outline-none">
+        </div>
+        <div class="flex items-center space-x-8 mr-2">
+            <a href="/registerSeller"
+                class="text-lg font-semibold text-gray-700 hover:text-gray-900 flex items-center space-x-2"> <i
+                    class="ri-store-fill text-xl mr-2"></i> Become a Seller</a>
+            <a href="/profile/<%= user._id %>"
+                class="text-lg font-semibold text-gray-700 hover:text-gray-900 flex items-center space-x-2"> <i
+                    class="ri-shopping-cart-line text-xl mr-2"></i> Cart</a>
+            <div class="relative">
+                <div class="w-16 h-16 rounded-full overflow-hidden">
+                    <% if (user.profilePic) { %>
+                    <img class="object-cover w-full h-full" src="data:image/jpeg;base64,<%= user.profilePic.toString('base64') %>"
+                        alt="Profile Picture">
+                    <% } else { %>
+                    <img class="object-cover w-full h-full" src="/default-profile-pic.jpg"
+                        alt="Default Profile Picture">
+                    <% } %>
+                </div>
+                <h1 class="profile absolute cursor-pointer inset-0 flex items-center justify-center text-blue-400 opacity-0">Profile</h1>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content: Product Grid -->
+    <div class="flex items-center justify-between px-8 mt-8">
+        <h1 class="text-3xl font-semibold">ALL BOOKS</h1>
+        <div class="flex items-center space-x-4">
+            <h1 class="text-xl font-semibold">Sort by genre</h1>
+            <label for="genre-select" class="text-lg">Select Genre:</label>
+            <select id="genre-select"
+                class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500">
+                <option value="">All</option>
+                <option value="Crime">Crime, Thriller</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Educational">Educational</option>
+                <option value="Motivational">Motivational</option>
+                <option value="Science">Science Fiction</option>
+                <option value="Business">Business, Economics</option>
+                <option value="Sports">Sports</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 px-8">
+        <% products.forEach(function(product) { %>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="h-48 bg-yellow-100 flex items-center justify-center">
+                <img class="max-h-full max-w-full object-contain"
+                    src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                    alt="<%= product.name %>">
+            </div>
+            <div class="p-4">
+                <h2 class="text-lg font-bold text-gray-800 truncate"><%= product.name %></h2>
+                <p class="text-sm text-gray-600">by <%= product.author %></p>
+                <div class="flex items-center">
+                    <span class="text-gray-900 font-bold text-lg">Rs. <%= product.price %></span>
+                    <% if (product.discount > 0) { %>
+                    <span
+                        class="ml-2 bg-yellow-500 text-xs text-white font-bold py-1 px-2 rounded-full">-<%= product.discount %>%</span>
+                    <% } %>
+                </div>
+                <p class="text-sm text-gray-700 mb-1">Genre: <span class="font-semibold"><%= product.genre %></span>
+                </p>
+                <p class="text-sm text-gray-700 mb-2">Format: Paperback</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="/addtocart/<%= product._id %>"
+                        class="add bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm flex items-center justify-center">
+                        <span>Add to Cart</span>
+                        <i class="ri-shopping-cart-fill ml-1"></i>
+                    </a>
+                    <a href="#"
+                        class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm flex items-center justify-center">
+                        <span>Buy Now</span>
+                        <i class="ri-flashlight-line ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+    <script>
+        const profileLink = document.querySelector('.profile');
+        const profileDropdown = document.querySelector('.profileDrop');
+
+        profileLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!profileDropdown.contains(e.target) && !profileLink.contains(e.target)) {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+        const add=document.querySelector('.add')
+        add.addEventListener('click',function(req,res){
+            add.textContent=Added
+        })
+
+        const addToCartButtons = document.querySelectorAll('.add');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                // event.preventDefault();
+                const originalText = button.textContent;
+                button.innerHTML = '<i class="ri-check-line"></i> Added';
+
+                setTimeout(function () {
+                    button.innerHTML = '<span>Add to Cart</span><i class="ri-shopping-cart-fill ml-1"></i>';
+                }, 5000);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<%- include('./partials/header.ejs') %>
+
+<div class="w-[50px] h-[50px] absolute right-4 top-3 rounded-full bg-red-300 mr-5 overflow-hidden">
+    <% if (user.picture) { %>
+        <img class="object-cover w-full h-full" src="data:image/jpeg;base64,<%= user.picture.toString('base64') %>"
+            alt="Profile Picture">
+        <% } else { %>
+        <img class="object-cover w-full h-full" src="/default-profile-pic.jpg"
+            alt="Default Profile Picture">
+        <% } %>
+        <h1 class="pro-det absolute cursor-pointer inset-0 flex items-center justify-center text-blue-400 opacity-0">Profile</h1>
+            </div>
+         
+<div class="profile hidden w-[15vw] h-[20vh] top-[12%] rounded-md flex flex-col gap-3 items-center justify-center right-[5%] bg-zinc-900 absolute">
+    <div class="w-[90%] h-[15%] flex items-center justify-start p-3 rounded-md bg-zinc-800 text-white">
+        <a href="/ownerProfile/update"><i class="ri-profile-line"></i> Profile</a>
+    </div>
+    <div class="w-[90%] h-[15%] flex items-center justify-start p-3 rounded-md  bg-zinc-800 text-white">
+        <a href="/logoutOwner"> <i class="ri-logout-box-r-line"></i> Logout</a>
+    </div>
+  </div>
+
+<div class="p-3 mt-[-12px]">
+    <h1 class="font-semibold text-[20px]">Hello <span class="font-bold text-[20px]"><%=user.name%></span> 👋🏻</h1>
+    <div class="flex items-center justify-between">
+        <h1 class="mt-2 font-semibold text-[20px]">Your Created Books</h1>
+         <a  class="text-blue-500" href="/products/createProduct">Create Product</a>
+    </div>
+</div>
+
+
+<div class="p-2 flex gap-3">
+    <%if(products.length!=0){%>
+        <h1 class="text-[16px] font-semibold">Sort by genre</h1>
+        <select class="border border-gray-300 rounded-md outline-none p-[2px]" id="category" name="category" required>
+            <option value="">All</option>
+            <option value="category1">Crime,Thriller</option>
+            <option value="category2">Comedy</option>
+            <option value="category3">Educational</option>
+            <option value="category4">Motivational</option>
+            <option value="category5">Science,Fiction</option>
+            <option value="category6">Business,Economics</option>
+            <option value="category6">Sports</option>
+        </select>
+        <%}%>
+</div>
+
+
+   <div class="w-full min-h-[50vh] flex flex-wrap justify-center items-center gap-6 mt-2 p-4">
+    <% user.posts.forEach(function(product) { %>
+        <div class="w-[16vw] h-[64vh] bg-gray-800 text-white p-4 rounded-md shadow-md overflow-hidden">
+            <div class="h-48 bg-yellow-100 flex mb-2 items-center justify-center">
+                <img class="max-h-full max-w-full object-contain"
+                    src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                    alt="<%= product.name %>">
+            </div>
+            <div class="flex flex-col justify-between h-full">
+                <div>
+                    <h1 class="font-bold text-lg truncate"><%= product.name %></h1>
+                    <h4 class="text-sm text-gray-400">by <span class="font-medium underline text-red-400"><%= product.author %></span></h4>
+                    <div class="flex items-center mt-1">
+                        <span class="font-bold text-lg">Rs. <%= product.price %></span>
+                        <% if (product.discount > 0) { %>
+                            <span class="ml-2 bg-yellow-500 text-xs font-bold py-1 px-2 rounded-full">-<%= product.discount %>%</span>
+                        <% } %>
+                    </div>
+                    <h1 class="text-sm text-gray-400 mt-1">Genre: <span class="font-semibold"> <%= product.genre %></span></h1>
+                    <h1 class="text-sm text-gray-400 mt-1">Format: Paperback</h1>
+                    <div class="flex gap-2 items-center mt-2">
+                        <a class="text-blue-500 font-medium text-xs hover:underline" href="/products/edit/<%= product._id %>">Edit Book</a>
+                        <a class="text-red-500 font-medium text-xs hover:underline" href="/products/delete/<%= product._id %>">Delete Book</a>
+                    </div>
+                </div>
+                
+            </div>
+           
+        </div>
+    <% }); %>
+</div>
+
+
+<script>
+     const pro = document.querySelector('.pro-det');
+    const div = document.querySelector('.profile');
+    pro.addEventListener('click', function (e) {
+      e.preventDefault(); 
+      div.classList.toggle('hidden');  // toggle is a method which will add the class if it is not present when it executed and vise-versa
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!div.contains(e.target) && !pro.contains(e.target)) {
+        div.classList.add('hidden'); // Hide the div if the click is outside of it and the .pro-det link
+      }
+    });
+</script>
+
+
+<%- include('./partials/footer.ejs') %>

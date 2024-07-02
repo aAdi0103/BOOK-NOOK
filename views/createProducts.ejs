@@ -1,0 +1,36 @@
+<%- include('./partials/header') %>
+   
+            <div class="h-[85vh] w-full mt-2 flex">
+  <div class="w-[70%]">
+    <main class="h-[100%] bg-white p-8 shadow ml-4">
+        <h2 class="text-xl font-bold mt-[-15px] mb-4">Create New Product</h2>
+        <form autocomplete="off" action="/products/create" method="post" enctype="multipart/form-data">
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2">Product Details</h3>
+                <div class="mb-4">
+                    <label class="block mb-2 font-medium">Product Image</label>
+                    <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <input name="name" type="text" placeholder="Book Name"
+                        class="border p-2 rounded w-full">
+                    <input name="author" type="text" placeholder="Author"
+                        class="border p-2 rounded w-full">
+                    <input name="price" type="text" placeholder="Book Price"
+                        class="border p-2 rounded w-full">
+                    <input name="seller" type="text" placeholder="Book Price"
+                        class="border p-2 rounded w-full" value="<%=user.name%>" disabled>
+                    <input name="discount" type="text" placeholder="Discount Price"
+                        class="border p-2 rounded w-full">
+                    <input name="genre" type="text" placeholder="Genre"
+                        class="border p-2 rounded w-full">
+                </div>
+            </div>
+            <input class="px-5 py-2 rounded mt-3 bg-blue-500 text-white" type="submit"
+                value="Create New Product">
+        </form>
+    </main>
+</div>
+            </div>
+            
+            <%- include('./partials/footer') %>
