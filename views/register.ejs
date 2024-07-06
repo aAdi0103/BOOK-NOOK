@@ -1,7 +1,7 @@
 <%- include('./partials/header.ejs') %>
 
 <div class="w-full h-[88vh] flex justify-center items-center bg-gradient-to-r from-sky-100 to-indigo-100">
-  <div class="w-full md:w-[30%] max-w-md bg-white rounded-md p-4 shadow-md">
+  <div class="w-[30%] max-w-md bg-white rounded-md p-4 shadow-md max-md:w-[54vw]">
     <h1 class="text-2xl text-indigo-600 font-bold mb-4 text-center">Register as Customer</h1>
     <form class="flex flex-col gap-3 mb-5" action="/create" method="post">
       <input class="block w-full outline-none rounded-md border-2 border-indigo-200 p-2" type="text" placeholder="Name" name="name" autocomplete="off" required>
@@ -9,7 +9,7 @@
       <input class="block w-full outline-none rounded-md border-2 border-indigo-200 p-2" type="password" placeholder="Password" name="password">
       <button class="bg-indigo-600 text-white p-2 w-full rounded-md hover:bg-indigo-700" type="submit">Register</button>
     </form>
-    <a class="text-sm mt-3 text-center" href="/">Already Registered ? <span class="text-indigo-600 underline text-sm">Login Here..</span></a>
+    <a class="text-sm mt-3 text-center max-md:text-[15px]" href="/">Already Registered ? <span class="text-indigo-600 underline text-sm">Login Here..</span></a>
   </div>
 </div>
 

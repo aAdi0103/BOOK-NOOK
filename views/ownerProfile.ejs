@@ -1,6 +1,6 @@
 <%- include('./partials/header.ejs') %>
 
-<div class="w-[50px] h-[50px] absolute right-4 top-3 rounded-full bg-red-300 mr-5 overflow-hidden">
+<div class="w-[50px] h-[50px] absolute right-4 top-3 rounded-full bg-red-300 mr-5 overflow-hidden max-md:mr-[-2vw]">
     <% if (user.picture) { %>
         <img class="object-cover w-full h-full" src="data:image/jpeg;base64,<%= user.picture.toString('base64') %>"
             alt="Profile Picture">
@@ -11,7 +11,7 @@
         <h1 class="pro-det absolute cursor-pointer inset-0 flex items-center justify-center text-blue-400 opacity-0">Profile</h1>
             </div>
          
-<div class="profile hidden w-[15vw] h-[20vh] top-[12%] rounded-md flex flex-col gap-3 items-center justify-center right-[5%] bg-zinc-900 absolute">
+<div class="profile hidden w-[15vw] h-[20vh] top-[12%] rounded-md flex flex-col gap-3 items-center justify-center right-[5%] bg-zinc-900 absolute max-md:right-[65px] max-md:mt-[-25px] max-md:w-[28vw] max-md:h-[12vh]">
     <div class="w-[90%] h-[15%] flex items-center justify-start p-3 rounded-md bg-zinc-800 text-white">
         <a href="/ownerProfile/update"><i class="ri-profile-line"></i> Profile</a>
     </div>
@@ -21,7 +21,7 @@
   </div>
 
 <div class="p-3 mt-[-12px]">
-    <h1 class="font-semibold text-[20px]">Hello <span class="font-bold text-[20px]"><%=user.name%></span> 👋🏻</h1>
+    <h1 class="font-semibold text-[20px] max-md:text-[15px]">Hello <span class="font-bold text-[20px] max-md:text-[18px]"><%=user.name%></span> 👋🏻</h1>
     <div class="flex items-center justify-between">
         <h1 class="mt-2 font-semibold text-[20px]">Your Created Books</h1>
          <a  class="text-blue-500" href="/products/createProduct">Create Product</a>
@@ -29,10 +29,10 @@
 </div>
 
 
-<div class="p-2 flex gap-3">
+<div class="p-4 flex gap-3">
     <%if(products.length!=0){%>
-        <h1 class="text-[16px] font-semibold">Sort by genre</h1>
-        <select class="border border-gray-300 rounded-md outline-none p-[2px]" id="category" name="category" required>
+        <h1 class="text-[16px] max-md:text-[15px] font-semibold">Sort by genre</h1>
+        <select class="border border-gray-300 rounded-md outline-none p-[2px] max-md:text-[10px] max-md:p-0" id="category" name="category" required>
             <option value="">All</option>
             <option value="category1">Crime,Thriller</option>
             <option value="category2">Comedy</option>
@@ -48,7 +48,7 @@
 
    <div class="w-full min-h-[50vh] flex flex-wrap justify-center items-center gap-6 mt-2 p-4">
     <% user.posts.forEach(function(product) { %>
-        <div class="w-[16vw] h-[64vh] bg-gray-800 text-white p-4 rounded-md shadow-md overflow-hidden">
+        <div class="w-[16vw] h-[64vh] bg-gray-800 text-white p-4 rounded-md shadow-md overflow-hidden max-md:w-[40vw] max-md:h-[41vh]">
             <div class="h-48 bg-yellow-100 flex mb-2 items-center justify-center">
                 <img class="max-h-full max-w-full object-contain"
                     src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"

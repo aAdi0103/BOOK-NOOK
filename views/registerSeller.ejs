@@ -1,7 +1,7 @@
 <%- include('./partials/header.ejs') %>
 
 <div class="w-full h-[88vh] flex justify-center items-center bg-gradient-to-r from-cyan-100 to-blue-100">
-  <div class="w-[30%] h-[73%] bg-white rounded-md p-4 shadow-md mt-[-40px]">
+  <div class="w-[30%] h-[73%] bg-white rounded-md p-4 shadow-md mt-[-40px] max-md:w-[55vw] max-md:h-[43vh]">
     <h1 class="text-2xl text-teal-600 font-bold mb-4">Register as Seller</h1>
     <form class="flex flex-col gap-3 mb-5" action="/createSeller" method="post">
       <input class="block w-full outline-none rounded-md border-2 border-teal-200 p-[7px]" type="text" placeholder="Name" name="name" autocomplete="off" required>

@@ -33,7 +33,6 @@ router.get('/edit/:id', isLoggedInOwner, async function(req, res) {
 
 
 
-
 // update Post
 router.post('/update/:id', isLoggedInOwner, upload.single('image'), async function(req, res) {
     try {
