@@ -21,16 +21,22 @@ router.post('/login',loginUser);
 router.get('/logout',logoutUser);
 
 router.get('/profile',isLoggedIn,async function(req,res){
-    let user = await userModel.findOne({email:req.user.email});
+    try{let user = await userModel.findOne({email:req.user.email});
     // console.log(user);
     let products= await productModel.find();
-    res.render('profile',{user,products});
+    res.render('profile',{user,products});}
+    catch(err){
+        res.send(err.message);
+    }
 })
 
 // Profile Details Update
 router.get('/profile/update',isLoggedIn,async function(req,res){
-    let user=await userModel.findOne({email:req.user.email});
-    res.render('updateprofile',{user})
+   try{ let user=await userModel.findOne({email:req.user.email});
+    res.render('updateprofile',{user})}
+    catch(err){
+        res.send(err.message);
+    }
 })
 
 // update profile
@@ -79,13 +85,19 @@ router.post('/profile/update/:id', isLoggedIn, upload.single('image'), async fun
 router.get('/registerSeller',registerSeller)
 router.post('/createSeller',createSeller)
 router.get('/ownerProfile',isLoggedInOwner,async function(req,res){
-    let products=await productModel.find();
+   try{ let products=await productModel.find();
     let user = await ownerModel.findOne({email:req.user.email}).populate('posts');
-    res.render('ownerProfile',{user,products});
+    res.render('ownerProfile',{user,products});}
+    catch(err){
+        res.send(err.message);
+    }
 })
 router.get('/ownerProfile/update',isLoggedInOwner,async function(req,res){
-    let owner=await ownerModel.findOne({email:req.user.email});
-    res.render('updateOwnerProfile',{owner})
+  try{  let owner=await ownerModel.findOne({email:req.user.email});
+    res.render('updateOwnerProfile',{owner})}
+    catch(err){
+        res.send(err.message);
+    }
 })
 
 

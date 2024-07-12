@@ -48,7 +48,7 @@
 
    <div class="w-full min-h-[50vh] flex flex-wrap justify-center items-center gap-6 mt-2 p-4">
     <% user.posts.forEach(function(product) { %>
-        <div class="w-[16vw] h-[64vh] bg-gray-800 text-white p-4 rounded-md shadow-md overflow-hidden max-md:w-[40vw] max-md:h-[41vh]">
+        <div class="w-[16vw] h-[64vh] bg-gray-800 text-white p-4 rounded-md shadow-md overflow-hidden max-md:w-[40vw] max-md:h-auto">
             <div class="h-48 bg-yellow-100 flex mb-2 items-center justify-center">
                 <img class="max-h-full max-w-full object-contain"
                     src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
@@ -67,8 +67,8 @@
                     <h1 class="text-sm text-gray-400 mt-1">Genre: <span class="font-semibold"> <%= product.genre %></span></h1>
                     <h1 class="text-sm text-gray-400 mt-1">Format: Paperback</h1>
                     <div class="flex gap-2 items-center mt-2">
-                        <a class="text-blue-500 font-medium text-xs hover:underline" href="/products/edit/<%= product._id %>">Edit Book</a>
-                        <a class="text-red-500 font-medium text-xs hover:underline" href="/products/delete/<%= product._id %>">Delete Book</a>
+                        <a class="text-blue-500 font-medium text-xs hover:underline max-md:text-[10px]" href="/products/edit/<%= product._id %>">Edit Book</a>
+                        <a class="text-red-500 font-medium text-xs hover:underline max-md:text-[10px]" href="/products/delete/<%= product._id %>">Delete Book</a>
                     </div>
                 </div>
                 

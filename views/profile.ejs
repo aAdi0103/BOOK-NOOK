@@ -7,6 +7,20 @@
     <title>Book Nook</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+         <style>
+        /* Your existing CSS here */
+        
+        /* Media query to hide the "Become a Seller" tag on small screens */
+        @media (max-width: 600px) {
+            .seller-tag {
+                display: none;
+            }
+            .genre{
+                display: none;
+            }
+
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -26,19 +40,23 @@
     <!-- Navigation Bar -->
     <nav class="flex justify-between items-center bg-white py-4 px-8 shadow-lg max-md:w-[100vw]">
         <div class="flex items-center space-x-8">
-            <h1 id="btn" class="text-3xl font-bold cursor-pointer text-black max-md:text-[16px] max-md:font-extrabold max-md:ml-[-20px]">BOOK NOOK</h1>
+            <h1 id="btn" class="text-3xl font-bold cursor-pointer text-black max-md:text-[10px] max-md:font-bold max-md:ml-[-24px]">BOOK <span class="max-md:mt-[-20px]">NOOK</span></h1>
             <input type="text" placeholder="Search for books"
-                class="w-96 p-2 border-none border-gray-300 rounded-md bg-gray-200 focus:outline-none max-md:w-[25vw] max-md:absolute max-md:left-[16vw]">
+                class="w-96 p-2 border-none border-gray-300 rounded-md bg-gray-200 focus:outline-none max-md:w-[35vw] max-md:absolute max-md:left-[11vw] max-md:p-1">
         </div>
         <div class="flex items-center space-x-8 mr-2">
-            <a href="/registerSeller"
+            <div class="seller-tag ">
+                <a href="/registerSeller"
                 class="text-lg font-semibold text-gray-700 hover:text-gray-900 flex items-center space-x-2"> <i
                     class="ri-store-fill text-xl mr-2 max-md:text-sm"></i> <span class="max-md:text-[15px]">Become a Seller</span></a>
-            <a href="/profile/<%= user._id %>"
-                class="text-lg font-semibold text-gray-700 hover:text-gray-900 flex items-center space-x-2"> <i
-                    class="ri-shopping-cart-line text-xl mr-2"></i> Cart</a>
+            </div>
+            <div class="max-md:mr-[-20px]">
+                <a href="/profile/<%= user._id %>"
+                    class="text-lg font-semibold text-gray-700 hover:text-gray-900 flex items-center space-x-2"> <i
+                        class="ri-shopping-cart-line text-xl mr-2"></i> Cart</a>
+            </div>
             <div class="relative">
-                <div class="w-16 h-16 rounded-full overflow-hidden max-md:mr-[-20px]">
+                <div class="w-16 h-16 rounded-full overflow-hidden max-md:mr-[-20px] max-md:w-12 max-md:h-12">
                     <% if (user.profilePic) { %>
                     <img class="object-cover w-full h-full" src="data:image/jpeg;base64,<%= user.profilePic.toString('base64') %>"
                         alt="Profile Picture">
@@ -54,10 +72,10 @@
 
     <!-- Main Content: Product Grid -->
     <div class="flex items-center justify-between px-8 mt-8">
-        <h1 class="text-3xl font-semibold max-md:text-xl">ALL BOOKS</h1>
+        <h1 class="text-3xl font-semibold max-md:text-sm">ALL BOOKS</h1>
         <div class="flex items-center space-x-4">
-            <h1 class="text-xl font-semibold max-md:text-sm">Sort by genre</h1>
-            <label for="genre-select" class="text-lg max-md:text-sm">Select Genre:</label>
+            <h1 class="text-xl font-semibold max-md:text-[10px]">Sort by genre</h1>
+            <label for="genre-select" class="genre text-lg max-md:text-sm">Select Genre:</label>
             <select id="genre-select"
                 class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 max-md:p-1 max-md:text-xs">
                 <option value="">All</option>

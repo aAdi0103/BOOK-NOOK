@@ -9,8 +9,11 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 
 
 router.get('/createProduct',isLoggedInOwner,async function(req, res) {
-    let user = await ownerModel.findOne({email:req.user.email});
-        res.render('createProducts',{user});
+    try{let user = await ownerModel.findOne({email:req.user.email});
+        res.render('createProducts',{user});}
+        catch(err){
+          res.send(err.message);
+        }
 });
 
 
@@ -65,9 +68,12 @@ router.post('/update/:id', isLoggedInOwner, upload.single('image'), async functi
 
 
 router.get('/delete/:id',async function(req,res){
-    let post=await postModel.findOneAndDelete({_id:req.params.id})
+    try{let post=await postModel.findOneAndDelete({_id:req.params.id})
 
-   res.redirect('/ownerProfile');
+   res.redirect('/ownerProfile');}
+   catch(err){
+           res.send(err.message);
+   }
   
   })
 
