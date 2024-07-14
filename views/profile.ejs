@@ -40,9 +40,12 @@
     <!-- Navigation Bar -->
     <nav class="flex justify-between items-center bg-white py-4 px-8 shadow-lg max-md:w-[100vw]">
         <div class="flex items-center space-x-8">
-            <h1 id="btn" class="text-3xl font-bold cursor-pointer text-black max-md:text-[10px] max-md:font-bold max-md:ml-[-24px]">BOOK <span class="max-md:mt-[-20px]">NOOK</span></h1>
-            <input type="text" placeholder="Search for books"
-                class="w-96 p-2 border-none border-gray-300 rounded-md bg-gray-200 focus:outline-none max-md:w-[35vw] max-md:absolute max-md:left-[11vw] max-md:p-1">
+            <h1 id="btn" class="text-2xl font-extrabold cursor-pointer text-black max-md:text-[10px] max-md:font-bold max-md:ml-[-24px] max-md:mt-[-35px]">BOOK <span class="max-md:mt-[-20px]">NOOK</span></h1>
+            <form action="/search" method="get" class="flex">
+            <input type="text" name="query" placeholder="Search for books, author, genre"
+                class="w-96 p-2 border-none border-gray-300 rounded-md bg-gray-200 focus:outline-none max-md:w-[35vw] max-md:absolute max-md:left-[2vw] max-md:p-1">
+            <button type="submit" class="bg-blue-500 text-white px-4 ml-2 rounded-md  max-md:z-20 max-md:absolute max-md:left-[40vw] max-md:top-[4.5vh] max-md:px-2">Search</button>
+        </form>
         </div>
         <div class="flex items-center space-x-8 mr-2">
             <div class="seller-tag ">
@@ -52,8 +55,8 @@
             </div>
             <div class="max-md:mr-[-20px]">
                 <a href="/profile/<%= user._id %>"
-                    class="text-lg font-semibold text-gray-700 hover:text-gray-900 flex items-center space-x-2"> <i
-                        class="ri-shopping-cart-line text-xl mr-2"></i> Cart</a>
+                    class="text-lg font-semibold text-gray-700 hover:text-gray-900 flex items-center space-x-2 max-md:text-[12px] max-md:mr-[-10px]"> <i
+                        class="ri-shopping-cart-line text-xl max-md:text-[12px] mr-2"></i> Cart</a>
             </div>
             <div class="relative">
                 <div class="w-16 h-16 rounded-full overflow-hidden max-md:mr-[-20px] max-md:w-12 max-md:h-12">
@@ -72,22 +75,7 @@
 
     <!-- Main Content: Product Grid -->
     <div class="flex items-center justify-between px-8 mt-8">
-        <h1 class="text-3xl font-semibold max-md:text-sm">ALL BOOKS</h1>
-        <div class="flex items-center space-x-4">
-            <h1 class="text-xl font-semibold max-md:text-[10px]">Sort by genre</h1>
-            <label for="genre-select" class="genre text-lg max-md:text-sm">Select Genre:</label>
-            <select id="genre-select"
-                class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 max-md:p-1 max-md:text-xs">
-                <option value="">All</option>
-                <option value="Crime">Crime, Thriller</option>
-                <option value="Comedy">Comedy</option>
-                <option value="Educational">Educational</option>
-                <option value="Motivational">Motivational</option>
-                <option value="Science">Science Fiction</option>
-                <option value="Business">Business, Economics</option>
-                <option value="Sports">Sports</option>
-            </select>
-        </div>
+        <h1 class="text-2xl font-semibold max-md:text-sm">ALL BOOKS</h1>
     </div>
 
     <!-- Product Grid -->

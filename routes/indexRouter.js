@@ -1,16 +1,17 @@
 const express=require('express');
 const router=express.Router();
-const {landingPageController,register,registerSeller,createUser,createSeller,loginUser,logoutUser,loginSeller,logoutOwner}=require('../controllers/index-controllers')
+const {landingPageController,register,registerSeller,createUser,createSeller,loginUser,logoutUser,loginSeller,logoutOwner,searchBooks,searchBookOwner}=require('../controllers/index-controllers')
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const isLoggedInOwner=require('../middlewares/isLoggedInOwner')
 const {userModel,validateModel}=require('../models/user-model');
 const { ownerModel } = require('../models/owner-model');
 const productModel=require('../models/books-model');
 const upload = require('../config/multer-connection');
+const { redirectIfLoggedIn } = require('../middlewares/redirectIfLoggedIn');
 
 
 // User
-router.get('/',landingPageController)
+router.get('/',redirectIfLoggedIn,landingPageController)
 router.get('/register',register)
 
 router.post('/create',createUser)
@@ -73,11 +74,8 @@ router.post('/profile/update/:id', isLoggedIn, upload.single('image'), async fun
 });
 
 
-
-
-
-
-
+router.get('/search', searchBooks);
+// router.get('/Booksearch', isLoggedInOwner,searchBookOwner);
 
 
 // Owner

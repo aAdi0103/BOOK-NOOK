@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="mt-10"> <a class="text-blue-500 mt-10 ml-5" href="/profile">Go to Profile</a></div>
+    <div class="flex items-center justify-between px-8 mt-8">
+        <h1 class="text-3xl font-semibold max-md:text-sm">Search Results</h1>
+    </div>
+   <%if(books.length>0){%>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 px-8">
+        <% books.forEach(function(book) { %>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="h-48 bg-yellow-100 flex items-center justify-center">
+                <img class="max-h-full max-w-full object-contain"
+                    src="data:image/jpeg;base64,<%= book.image.toString('base64') %>"
+                    alt="<%= book.name %>">
+            </div>
+            <div class="p-4">
+                <h2 class="text-lg font-bold text-gray-800 truncate"><%= book.name %></h2>
+                <p class="text-sm text-gray-600">by <%= book.author %></p>
+                <div class="flex items-center">
+                    <span class="text-gray-900 font-bold text-lg">Rs. <%= book.price %></span>
+                    <% if (book.discount > 0) { %>
+                    <span
+                        class="ml-2 bg-yellow-500 text-xs text-white font-bold py-1 px-2 rounded-full">-<%= book.discount %>%</span>
+                    <% } %>
+                </div>
+                <p class="text-sm text-gray-700 mb-1">Genre: <span class="font-semibold"><%= book.genre %></span></p>
+                <p class="text-sm text-gray-700 mb-2">Format: Paperback</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="/addtocart/<%= book._id %>"
+                        class="add bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm flex items-center justify-center">
+                        <span>Add to Cart</span>
+                        <i class="ri-shopping-cart-fill ml-1"></i>
+                    </a>
+                    <a href="#"
+                        class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm flex items-center justify-center">
+                        <span>Buy Now</span>
+                        <i class="ri-flashlight-line ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+   <%} else{%>
+     <h1 class="text-red-500 mt-12 ml-12 font-semibold">Sorry, No books Found !!</h1>
+    <%}%>
+</body>
+</html>
