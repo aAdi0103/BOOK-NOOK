@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const {landingPageController,register,registerSeller,createUser,createSeller,loginUser,logoutUser,loginSeller,logoutOwner,searchBooks,searchBookOwner}=require('../controllers/index-controllers')
+const {landingPageController,register,registerSeller,createUser,createSeller,loginUser,logoutUser,loginSeller,logoutOwner,searchBooks,ownerSearch}=require('../controllers/index-controllers')
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const isLoggedInOwner=require('../middlewares/isLoggedInOwner')
 const {userModel,validateModel}=require('../models/user-model');
@@ -75,7 +75,7 @@ router.post('/profile/update/:id', isLoggedIn, upload.single('image'), async fun
 
 
 router.get('/search', searchBooks);
-// router.get('/Booksearch', isLoggedInOwner,searchBookOwner);
+router.get('/ownerSearch', isLoggedInOwner,ownerSearch);
 
 
 // Owner

@@ -202,32 +202,34 @@ module.exports.searchBooks = async function (req, res) {
 };
 
 
+module.exports.ownerSearch =async function searchBooks(req, res) {
+    try {
+        const query = req.query.query;
+        const ownerId = req.user.id;  
 
-// module.exports.searchBookOwner = async function (req, res) {
-//     try {
-//         const { query } = req.query;
-//         const searchRegex = new RegExp(query, 'i'); // Case insensitive search
+        const owners = await ownerModel.find({ _id: ownerId })
+            .populate({ // populate replaces path in a document of database with actual documents from other collection
+                path: 'posts',
+                match: {
+                    $or: [
+                        { name: { $regex: query, $options: 'i' } },
+                        { author: { $regex: query, $options: 'i' } },
+                        { genre: { $regex: query, $options: 'i' } }
+                    ]
+                }
+            });
 
-//         // Step 1: Find products that match the search criteria
-//         const matchingProducts = await booksModel.find({
-//             $or: [
-//                 { name: searchRegex },
-//                 { author: searchRegex },
-//                 { genre: searchRegex }
-//             ]
-//         });
+        const books = owners.flatMap(owner => owner.posts);
 
-//         // Step 2: Filter matching products that are in any owner's posts
-//         const filteredBooks = await productsModel.find({
-//             _id: { $in: matchingProducts.map(product => product._id) }
-//         });
+        res.render('searchResultsOwner', { books });
+    } 
+    catch (error) {
+        res.status(500).send('Server error');
+    }
+}
 
-//         // Render results
-//         res.render('searchResultsBooks', { books: filteredBooks });
-//     } catch (error) {
-//         res.status(500).send(error.message);
-//     }
-// };
+
+
 
 
 
